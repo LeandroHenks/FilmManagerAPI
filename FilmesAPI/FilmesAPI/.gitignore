@@ -1,0 +1,6 @@
+# Ignorar o arquivo de configuração
+appsettings.json
+
+# Ignorar a pasta Properties
+Properties/
+
