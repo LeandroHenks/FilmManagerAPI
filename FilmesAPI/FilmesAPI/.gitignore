@@ -4,3 +4,5 @@ appsettings.json
 # Ignorar a pasta Properties
 Properties/
 
+# Ignorar a pasta Dependências
+Dependências
