@@ -29,3 +29,4 @@ publish/
 *.suo
 *.csproj.user
 *.csproj.DotSettings
+*appsettings.json
