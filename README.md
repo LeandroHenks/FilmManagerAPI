@@ -66,11 +66,11 @@ dotnet ef database update
 ```plaintext
 dotnet tool install --global dotnet-ef
 ```
-- **4.Execute o projeto::**
+- **4. Execute o projeto::**
 ```plaintext
 dotnet run
 ```
-- **5.Acesse o Swagger para testar os endpoints:**
+- **5. Acesse o Swagger para testar os endpoints:**
 ```plaintext
 https://localhost:5001/swagger
 ```
