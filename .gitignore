@@ -1,0 +1,31 @@
+# Build
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# IDEs
+.vscode/
+.idea/
+.vs/
+
+# Logs
+*.log
+
+# User secrets
+secrets.json
+*.env
+
+# Publish output
+publish/
+*.db
+*.mdf
+*.ldf
+
+# Others
+*.cache
+*.user
+*.suo
+*.csproj.user
+*.csproj.DotSettings
