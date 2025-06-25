@@ -39,6 +39,39 @@ FilmManagerAPI/
 ├── Migrations/      # Histórico de migrações do EF Core
 └── Program.cs       # Configuração e startup do projeto
 ```
+## 🧱 Arquitetura da Aplicação
+
+A FilmManager API foi construída seguindo o padrão de **arquitetura em camadas**, separando bem as responsabilidades para garantir escalabilidade, manutenibilidade e facilidade de testes. As principais camadas e suas funções são:
+
+### 🔹 Controller
+- Responsável por expor os endpoints HTTP da API.
+- Recebe as requisições, aciona a lógica apropriada e retorna as respostas.
+
+### 🔹 DTOs (Data Transfer Objects)
+- Utilizados para transferir dados de forma segura entre a API e o cliente.
+- Evitam o vazamento direto de entidades do banco e permitem validações.
+
+### 🔹 Models
+- Representam as entidades do domínio, como `Filme`.
+- São usados pelo Entity Framework para mapear o banco de dados.
+
+### 🔹 Profiles (AutoMapper)
+- Realizam o mapeamento entre `Models` e `DTOs`, automatizando a conversão de dados.
+
+### 🔹 Data
+- Contém o `DbContext`, que atua como a ponte entre a aplicação e o banco de dados.
+- Centraliza o acesso ao repositório de dados via Entity Framework Core.
+
+---
+
+### 🧭 Fluxo de execução típico
+
+1. O cliente envia uma requisição HTTP para a API.
+2. O **Controller** recebe a requisição e chama os métodos apropriados.
+3. A requisição é tratada usando **DTOs**, mapeados via **AutoMapper**.
+4. O **DbContext** interage com o **MySQL** usando os **Models**.
+5. A resposta é convertida novamente em DTO (se necessário) e devolvida ao cliente.
+
 ## ⚙️ Como rodar o projeto localmente
 
 - **.NET 7 SDK**
