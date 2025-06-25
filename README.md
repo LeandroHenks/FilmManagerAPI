@@ -119,13 +119,14 @@ https://localhost:5001/swagger
 | DELETE | /api/filmes/{id}    | Remove um filme do catálogo        |
 ----
 ## 🧪 Testes via Swagger
-Após rodar o projeto, acesse https://localhost:5001/swagger para testar os endpoints diretamente na interface interativa gerada automaticamente com Swashbuckle.
+
+##### Após rodar o projeto, acesse https://localhost:5001/swagger para testar os endpoints diretamente na interface interativa gerada automaticamente com Swashbuckle.
 ---
-# 📦Sobre os DTOs
+## 📦Sobre os DTOs
 
 ##### O uso de DTOs (Data Transfer Objects) garante que apenas os dados necessários sejam expostos ou aceitos via API, evitando problemas de segurança e facilitando a validação das requisições. Os DTOs são mapeados para os Models com o auxílio do AutoMapper, o que simplifica a transformação dos dados internamente.
 ---
-# 🧱 Migrations
+## 🧱 Migrations
 
 
 ##### As Migrations são usadas para versionar o esquema do banco de dados com o EF Core. Toda vez que o modelo mudar, você pode criar uma nova migration com:
