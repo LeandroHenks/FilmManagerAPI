@@ -39,13 +39,30 @@ namespace FilmesApi.Controllers
                 new { id =filme.Id }, filme);
         }
 
+
+        /// <summary>
+        /// Recupera uma lista de filmes com paginação.
+        /// </summary>
+        /// <param name="skip">Número de registros a serem ignorados (para paginação).</param>
+        /// <param name="take">Número de registros a serem retornados (limite).</param>
+        /// <returns>Lista de filmes no formato ReadFilmeDto.</returns>
+        /// <response code="200">Filmes retornados com sucesso.</response>
         [HttpGet]
         public IEnumerable<ReadFilmeDto> RecuperaFilmes([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
             return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take));
         }
 
+        /// <summary>
+        /// Recupera um filme específico pelo ID.
+        /// </summary>
+        /// <param name="id">ID do filme a ser buscado.</param>
+        /// <returns>Um filme no formato ReadFilmeDto, caso encontrado.</returns>
+        /// <response code="200">Filme encontrado com sucesso.</response>
+        /// <response code="404">Filme não encontrado.</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult RecuperaFilmePorID(int id)
         {
             var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
@@ -54,7 +71,18 @@ namespace FilmesApi.Controllers
             return Ok(filmeDto);
         }
 
+
+        /// <summary>
+        /// Atualiza os dados de um filme existente.
+        /// </summary>
+        /// <param name="id">ID do filme a ser atualizado.</param>
+        /// <param name="filmeDto">Dados atualizados do filme.</param>
+        /// <returns>Retorna 204 se a atualização for bem-sucedida ou 404 se o filme não for encontrado.</returns>
+        /// <response code="204">Filme atualizado com sucesso.</response>
+        /// <response code="404">Filme não encontrado.</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AtualizaFilme(int id, [FromBody] 
             UpdateFilmeDto filmeDto) 
         {
@@ -65,7 +93,19 @@ namespace FilmesApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Atualiza parcialmente os dados de um filme existente.
+        /// </summary>
+        /// <param name="id">ID do filme a ser atualizado.</param>
+        /// <param name="patch">Documento JSON Patch contendo as operações de atualização parcial.</param>
+        /// <returns>Retorna 204 se a atualização for bem-sucedida, 400 para erros de validação, ou 404 se o filme não for encontrado.</returns>
+        /// <response code="204">Filme atualizado parcialmente com sucesso.</response>
+        /// <response code="400">Dados inválidos enviados no corpo da requisição.</response>
+        /// <response code="404">Filme não encontrado.</response>
         [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AtualizaFilmeParcial(int id, 
             JsonPatchDocument<UpdateFilmeDto> patch)
         {
@@ -85,7 +125,16 @@ namespace FilmesApi.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Remove um filme do banco de dados pelo ID.
+        /// </summary>
+        /// <param name="id">ID do filme a ser removido.</param>
+        /// <returns>Retorna 204 se a remoção for bem-sucedida ou 404 se o filme não for encontrado.</returns>
+        /// <response code="204">Filme removido com sucesso.</response>
+        /// <response code="404">Filme não encontrado.</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletaFilme(int id)
         {
             var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
